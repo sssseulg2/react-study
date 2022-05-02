@@ -3,23 +3,34 @@ import "./App.css";
 
 function App() {
 
-  let [title, titleModify] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬 독학']);
-  let [good, goodModify] = useState(0);
+  let [title, setTitle] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬 독학']);
+  let [good, setGood] = useState([0, 0, 0]);
+  let [modal, setModal] = useState(false);
 
   return (
+
     <div className="App">
       <div className="nav">
         <h4>블로그</h4>
       </div>
 
-      <button onClick={() => {
-        let copy = [...title];
-        copy = copy.sort();
-        titleModify(copy);
-      }}>정렬</button>
-
-      <div className="list">
-        <h4>{title[0]} <span onClick={() => {goodModify(good+1)}}>👍🏻</span> {good} </h4>
+      {
+        title.map(function(n, i){
+          return (
+            <div className="list" key={i}>
+            <h4 onClick={() => { setModal(!modal); }}>{title[i]}</h4>
+            <span onClick={() => {
+              let copy = [...good];
+              copy[i] = copy[i]+1;
+              setGood(copy);
+              }}>👍🏻 {good[i]}</span>
+            <p>2월 17일 발행</p>
+          </div>
+          )
+        })
+      }
+      {/* <div className="list">
+        <h4>{title[0]} <span onClick={() => {setGood(good+1)}}>👍🏻</span> {good} </h4>
         <p>2월 17일 발행</p>
       </div>
       <div className="list">
@@ -29,9 +40,22 @@ function App() {
       <div className="list">
         <h4>{title[2]}</h4>
         <p>2월 17일 발행</p>
-      </div>
+      </div> */}
 
-      <Modal />
+
+      <button onClick={() => {
+        let copy = [...title];
+        copy = copy.sort();
+        setTitle(copy);
+      }}>정렬</button>
+
+      <button onClick={() => {
+        // modal == true ? setModal(false) : setModal(true);
+        setModal(!modal);
+      }}>modal</button>
+      {
+        modal == false ? null : <Modal/>
+      }
 
     </div>
   );
