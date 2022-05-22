@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
 
   let [title, setTitle] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬 독학']);
+  let [titleNum, setTitleNum] = useState(0)
   let [good, setGood] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
 
@@ -18,7 +19,7 @@ function App() {
         title.map(function(n, i){
           return (
             <div className="list" key={i}>
-            <h4 onClick={() => { setModal(!modal); }}>{title[i]}</h4>
+            <h4 onClick={() => { setModal(!modal); setTitleNum(i); }}>{title[i]}</h4>
             <span onClick={() => {
               let copy = [...good];
               copy[i] = copy[i]+1;
@@ -29,18 +30,6 @@ function App() {
           )
         })
       }
-      {/* <div className="list">
-        <h4>{title[0]} <span onClick={() => {setGood(good+1)}}>👍🏻</span> {good} </h4>
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{title[1]}</h4>
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{title[2]}</h4>
-        <p>2월 17일 발행</p>
-      </div> */}
 
 
       <button onClick={() => {
@@ -53,8 +42,9 @@ function App() {
         // modal == true ? setModal(false) : setModal(true);
         setModal(!modal);
       }}>modal</button>
+
       {
-        modal == false ? null : <Modal/>
+        modal == false ? null : <Modal title={title} setTitle={setTitle} titleNum={titleNum}/>
       }
 
     </div>
@@ -73,12 +63,14 @@ function App() {
 let Modal = () => {}
 const Modal = () => {}
 */
-function Modal(){
+
+function Modal(props){
   return (
     <div className="modal">
-      <h4>title</h4>
+      <h4>{props.title[props.titleNum]}</h4>
       <p>date</p>
       <p>detail</p>
+      <button>글 수정</button>
     </div>
   )
 }
