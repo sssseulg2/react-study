@@ -4,9 +4,11 @@ import "./App.css";
 function App() {
 
   let [title, setTitle] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬 독학']);
-  let [titleNum, setTitleNum] = useState(0)
+  let [titleNum, setTitleNum] = useState(0);
   let [good, setGood] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
+  let [inputValue, setInputValue] = useState('');
+  let [date, setDate] = useState(['2월 17일', '2월 15일', '2월 3일'])
 
   return (
 
@@ -25,12 +27,16 @@ function App() {
               copy[i] = copy[i]+1;
               setGood(copy);
               }}>👍🏻 {good[i]}</span>
-            <p>2월 17일 발행</p>
+            <p>{date[i]} 발행</p>
+            <button onClick={() => {
+              let copy = [...title];
+              copy.splice(i, 1);
+              setTitle(copy);
+            }}>삭제</button>
           </div>
           )
         })
       }
-
 
       <button onClick={() => {
         let copy = [...title];
@@ -38,10 +44,37 @@ function App() {
         setTitle(copy);
       }}>정렬</button>
 
+      <br/><br/>
+
+      <input onChange={(e) => { 
+        setInputValue(e.target.value); 
+      }} />
+
       <button onClick={() => {
-        // modal == true ? setModal(false) : setModal(true);
-        setModal(!modal);
-      }}>modal</button>
+        if (inputValue === ''){
+          alert("글을 입력하세요!")
+        }
+        else {
+          let copy = [...title];
+          copy.unshift(inputValue);
+          setTitle(copy);
+
+          let goodCopy = [...good];
+          goodCopy.unshift(0);
+          setGood(goodCopy);
+
+          let now = new Date();
+          let todayMonth = now.getMonth() +1;
+          let todayDate = now.getDate();
+          let today = todayMonth + "월 " + todayDate + "일";
+          let dateCopy = [...date];
+          dateCopy.unshift(today);
+          setDate(dateCopy);
+
+        
+        }
+      }}
+      >추가</button>
 
       {
         modal == false ? null : <Modal title={title} setTitle={setTitle} titleNum={titleNum}/>
