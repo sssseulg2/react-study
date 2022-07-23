@@ -2,10 +2,11 @@ import {useState, useEffect} from 'react';
 import { Nav } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import data from '../data';
+import '../App.css';
 
 function Detail() {
+    let [fade, setFade] = useState("");
     let [sale, setSale] = useState(true);
-    let [inputValue, setInputValue] = useState('');
     let [alert, setAlert] = useState(false);
     let shoes = useState(data)[0];
     let {id} = useParams();
@@ -14,13 +15,16 @@ function Detail() {
     let [tab, setTab] = useState(0)
 
     useEffect(() => {
+        setTimeout(() => { setFade("end")}, 100)
         setTimeout(() => { setSale(false); }, 2000)
-        isNaN(inputValue) !== false ? setAlert(true) : setAlert(false)
-    }, [inputValue])
+        return () => {
+            setFade("")
+        }
+    }, [])
 
 
     return(
-        <div className="container">
+        <div className={"container start " + fade}>
             {
                 sale === true
                 ? <div className='alert alert-warning'>2초 이내 구매시 할인</div>
@@ -35,8 +39,6 @@ function Detail() {
                     <h4 className="pt-5">{shoes[id].title}</h4>
                     <p>{shoes[id].content}</p>
                     <p>{shoes[id].price}</p>
-                    <div><input value={inputValue} onChange={(e) => {setInputValue(e.target.value);}}></input></div>
-                    { alert ? <div className='alert alert-warning'> 숫자만 입력하세요 ㅡ ㅡ </div> : null}
                     <button className="btn btn-danger">주문하기</button> 
                 </div>
             </div>
@@ -58,9 +60,20 @@ function Detail() {
 }
 
 function TabContent({tab}) {
-    return [<div>내용0</div>,
-            <div>내용1</div>,
-            <div>내용2</div> ][tab]
+    let [fade, setFade] = useState("");
+
+    useEffect(() => {
+        setTimeout(() => {
+            setFade("end")
+        }, 100)
+        return ()=> {
+            setFade("")
+        }
+    }, [tab])
+    return (<div className={"start " + fade}>
+        {[ <div>내용0</div>, <div>내용1</div>, <div>내용2</div> ][tab]}
+    </div>)
+    
 }
 
 export default Detail;
