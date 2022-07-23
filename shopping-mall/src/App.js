@@ -1,5 +1,5 @@
 import { Nav, Navbar, Container} from 'react-bootstrap';
-import { Routes, Route, useNavigate, Outlet } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Main from './pages/Main';
 import Detail from './pages/Detail';
 import Event from './pages/Event';

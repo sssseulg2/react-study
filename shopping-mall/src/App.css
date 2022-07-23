@@ -5,6 +5,13 @@
   background-size: cover;
 
 }
+.item-row {
+  display: flex;
+  justify-content: space-between;
+}
+.item-card {
+  width: 30%;
+}
 .item {
   text-decoration: none;
   color: black;
