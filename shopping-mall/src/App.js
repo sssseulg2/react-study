@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import Main from './pages/Main';
 import Detail from './pages/Detail';
 import Event from './pages/Event';
+import Cart from './pages/Cart';
 import './App.css';
 
 
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main></Main>}/>
         <Route path="/detail/:id" element={<Detail/>} />
+        <Route path="/cart" element={<Cart/>} />
         <Route path="/event" element= {<Event/>}>
           <Route path="one" element={<div>첫 주문시 양말 서비스</div>}/>
           <Route path="two" element={<div>생일 기념 쿠폰 받기</div>}/>

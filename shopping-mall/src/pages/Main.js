@@ -32,7 +32,7 @@ function Main() {
             <Row className="item-row">
                 {shoes.map(function(n,i){
                     return (
-                        <Item shoes={n} number={i+1}></Item>
+                        <Item shoes={n} number={i+1} key={i}></Item>
                     )
                 })}
             </Row>
