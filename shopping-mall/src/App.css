@@ -12,10 +12,20 @@
   background-image: url(./img/bg.png);
   background-position: center;
   background-size: cover;
-
+}
+.main-ct {
+  display: flex;
+  flex-wrap: wrap;
+}
+.item-ct {
+  width: 80%;
+}
+.recent {
+  width: 20%;
 }
 .item-row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 .item-card {
@@ -30,6 +40,7 @@
 }
 
 .App {
+  
   text-align: center;
 }
 

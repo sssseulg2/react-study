@@ -5,9 +5,15 @@ import Detail from './pages/Detail';
 import Event from './pages/Event';
 import Cart from './pages/Cart';
 import './App.css';
+import { useEffect } from 'react';
 
 
 function App() {
+  useEffect(() => {
+    if (localStorage.getItem('watched') === null) {
+      localStorage.setItem('watched', JSON.stringify( [] ))
+    }
+  }, [])
   let navigate = useNavigate();
 
   return (

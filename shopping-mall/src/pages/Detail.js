@@ -18,6 +18,13 @@ function Detail() {
     let [tab, setTab] = useState(0)
 
     useEffect(() => {
+        let watched = JSON.parse(localStorage.getItem('watched'));
+        watched.push(id);
+        watched = new Set(watched)
+        watched = Array.from(watched)
+        localStorage.setItem('watched', JSON.stringify(watched));   
+    })
+    useEffect(() => {
         setTimeout(() => { setFade("end")}, 100)
         setTimeout(() => { setSale(false); }, 2000)
         return () => {
