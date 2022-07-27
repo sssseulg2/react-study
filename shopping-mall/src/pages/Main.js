@@ -47,7 +47,7 @@ function Main() {
             }
             </div>
             
-            <Recent className="recent"> </Recent>
+            <Recent className="recent" shoes={shoes}> </Recent>
         </div>
 
         </>
