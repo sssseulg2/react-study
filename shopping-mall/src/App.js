@@ -6,9 +6,15 @@ import Event from './pages/Event';
 import Cart from './pages/Cart';
 import './App.css';
 import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 
 function App() {
+  let result = useQuery(['user'], () =>
+    axios.get('https://codingapple1.github.io/userdata.json')
+    .then ((a) => {return a.data})
+  );
   useEffect(() => {
     if (localStorage.getItem('watched') === null) {
       localStorage.setItem('watched', JSON.stringify( [] ))
@@ -24,6 +30,11 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={() => {navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={() => {navigate('/cart')}}>Cart</Nav.Link>
+          </Nav>
+          <Nav>
+            { result.isLoading && '로딩중' }
+            { result.isError && '에러' }
+            { result.data && '반가워요 '+result.data.name}
           </Nav>
         </Container>
       </Navbar>
